@@ -1,4 +1,0 @@
-Test run for DES program
-Input: 123456ABCD
-Output: 85E813540F0AB405
-Status: OK

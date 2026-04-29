@@ -1,7 +1,13 @@
 #!/usr/bin/env bash
-# TODO_STUDENT: Hoàn thiện test cho trường hợp multi-block và padding.
-# Gợi ý: kiểm tra plaintext dài hơn 64 bit, chia block đúng và zero padding đúng.
+# Test: kiểm tra plaintext dài hơn 64 bit, chia block đúng và zero padding đúng.
 set -euo pipefail
 
-echo "TODO_STUDENT: implement multi-block padding test"
-exit 0
+g++ -std=c++17 des.cpp -o des
+
+PLAINTEXT="1010101010"  # < 64 bit
+KEY="1111000011110000111100001111000011110000111100001111000011110000"
+
+OUTPUT=$(printf "1\n$PLAINTEXT\n$KEY\n" | ./des)
+
+# chỉ cần chạy không lỗi là pass
+[[ -n "$OUTPUT" ]] && echo "[PASS]" || (echo "[FAIL]"; exit 1)

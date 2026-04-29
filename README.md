@@ -57,33 +57,25 @@ cmake --build build
 
 ## 3. Input / Đầu vào
 
-TODO_STUDENT: Mô tả rõ đầu vào của chương trình sau khi em hoàn thiện bài lab.
-
-Gợi ý nên nêu:
-- plaintext đang được nhập như thế nào
-- key đang được nhập như thế nào
-- chương trình nhận 1 block hay nhiều block
-- định dạng dữ liệu là chuỗi bit, chuỗi ký tự hay file
+Chương trình nhận dữ liệu đầu vào trực tiếp từ bàn phím (stdin) theo thứ tự:
+- **Mode:** Chọn 1 (DES Encrypt), 2 (DES Decrypt), 3 (3DES Encrypt), hoặc 4 (3DES Decrypt).
+- **Dữ liệu (Plaintext/Ciphertext):** Nhập dưới dạng chuỗi nhị phân (0 và 1). Chương trình hỗ trợ nhập chuỗi có độ dài bất kỳ (nhiều block).
+- **Khóa (Key):** Nhập chuỗi nhị phân 64-bit cho DES. Đối với TripleDES, nhập lần lượt 3 khóa K1, K2, K3 (mỗi khóa 64-bit).
 
 ## 4. Output / Đầu ra
 
-TODO_STUDENT: Mô tả rõ đầu ra của chương trình.
-
-Gợi ý nên nêu:
-- ciphertext hiển thị ra sao
-- có in round keys hay không
-- có hỗ trợ giải mã hay không
-- với TripleDES thì đầu ra gồm những gì
+Kết quả được hiển thị trên màn hình (stdout):
+- **Ciphertext/Plaintext cuối cùng:** Hiển thị dưới dạng chuỗi nhị phân liên tục.
+- **Chi tiết các bước:** Chương trình in ra các Round Keys (khóa vòng) cho mỗi block để phục vụ việc kiểm tra và theo dõi quá trình mã hóa/giải mã.
+- **TripleDES:** Thực hiện đúng quy trình E-D-E (Encrypt-Decrypt-Encrypt).
 
 ## 5. Padding đang dùng
 
-TODO_STUDENT: Giải thích cơ chế padding em dùng.
-
-Gợi ý:
-- nếu plaintext dài hơn 64 bit thì chia block như thế nào
-- nếu thiếu bit thì pad bằng `0` ra sao
-- hạn chế của zero padding là gì
-- vì sao cách này chỉ phù hợp cho bài học nhập môn, không phải thiết kế an toàn hoàn chỉnh trong thực tế
+Chương trình sử dụng cơ chế **Zero Padding**:
+- **Cơ chế:** Nếu độ dài plaintext không phải là bội số của 64, các bit `0` sẽ được thêm vào cuối block cuối cùng cho đến khi đủ 64 bit.
+- **Xử lý đa block:** Plaintext dài được chia thành các cụm 64 bit độc lập để xử lý lần lượt.
+- **Hạn chế:** Zero padding có thể gây nhầm lẫn nếu dữ liệu gốc vốn dĩ kết thúc bằng các bit 0 (không phân biệt được đâu là dữ liệu thật, đâu là padding). 
+- **Lưu ý:** Đây là cách tiếp cận cơ bản trong học thuật. Trong thực tế, các chuẩn như PKCS#7 thường được ưu tiên sử dụng để đảm bảo tính toàn vẹn dữ liệu khi giải mã.
 
 ## 6. Tests bắt buộc
 

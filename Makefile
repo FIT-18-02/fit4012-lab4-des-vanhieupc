@@ -15,6 +15,12 @@ run: $(TARGET)
 
 test: $(TARGET)
 	bash tests/test_sample.sh
+	bash tests/test_des_sample.sh
+	bash tests/test_encrypt_decrypt_roundtrip.sh
+	bash tests/test_multiblock_padding.sh
+	bash tests/test_triple_des.sh
+	bash tests/test_tamper_negative.sh
+	bash tests/test_wrong_key_negative.sh
 
 clean:
 	rm -f $(TARGET)

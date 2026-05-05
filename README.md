@@ -55,6 +55,18 @@ cmake --build build
 ./build/des
 ```
 
+### Chạy test local
+
+```bash
+make test
+```
+
+Hoặc chạy script mẫu:
+
+```bash
+bash scripts/run_sample.sh
+```
+
 ## 3. Input / Đầu vào
 
 Chương trình nhận dữ liệu đầu vào trực tiếp từ bàn phím (stdin) theo thứ tự:

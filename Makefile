@@ -13,15 +13,14 @@ $(TARGET): $(SRC)
 run: $(TARGET)
 	./$(TARGET)
 
+# Sửa lại phần test để chạy toàn bộ các bài kiểm tra trong thư mục tests
 test: $(TARGET)
-	bash tests/test_sample.sh
-	bash tests/test_des_sample.sh
-	bash tests/test_encrypt_decrypt_roundtrip.sh
-	bash tests/test_multiblock_padding.sh
-	bash tests/test_triple_des.sh
-	bash tests/test_tamper_negative.sh
-	bash tests/test_wrong_key_negative.sh
+	@for file in tests/*.sh; do \
+		echo "Running $$file..."; \
+		bash $$file; \
+	done
 
 clean:
 	rm -f $(TARGET)
-	rm -rf build
+	rm -rf build logs/*.log
+// hi

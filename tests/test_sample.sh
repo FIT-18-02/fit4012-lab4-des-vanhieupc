@@ -1,18 +1,24 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-PLAINTEXT="0000000100100011010001010110011110001001101010111100110111101111"
-KEY="0001001100110100010101110111100110011011101111001101111111110001"
-EXPECTED="1000010111101000000100110101010000001111000010101011010000000101"
-
+# Dữ liệu mong đợi (Chuỗi Hex sau khi mã hóa mẫu 1 block)
+EXPECTED="85E813540F0AB405"
+//hi
+# Biên dịch chương trình des.cpp
 g++ -std=c++17 -Wall -Wextra -pedantic des.cpp -o des_test
-OUTPUT=$(printf "1\n%s\n%s\n" "$PLAINTEXT" "$KEY" | ./des_test | tail -n 1)
 
-if [[ "$OUTPUT" != "$EXPECTED" ]]; then
+# Chạy chương trình với dữ liệu mẫu qua stdin
+# Mode 1 (DES Encrypt), Plaintext, Key
+OUTPUT=$(echo -e "1\n0123456789ABCDEF\n133457799BBCDFF1" | ./des_test)
+
+# Lấy dòng cuối cùng chứa kết quả Hex
+LAST_LINE=$(printf "%s\n" "$OUTPUT" | tail -n 1)
+
+# Kiểm tra kết quả
+if [[ "$LAST_LINE" != "$EXPECTED" ]]; then
   echo "[FAIL] Unexpected ciphertext output"
   echo "Expected: $EXPECTED"
-  echo "Actual:   $OUTPUT"
-  rm -f des_test
+  echo "Actual:   $LAST_LINE"
   exit 1
 fi
 

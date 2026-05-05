@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
+//hi
+# Di chuyển ra thư mục gốc để biên dịch nếu cần, hoặc dùng đường dẫn trực tiếp
+# Biên dịch des.cpp và tạo file thực thi 'des'
+g++ -std=c++17 -Wall -Wextra -pedantic ../des.cpp -o des
 
-g++ -std=c++17 -Wall -Wextra -pedantic des.cpp -o des
-printf "1\n0000000100100011010001010110011110001001101010111100110111101111\n0001001100110100010101110111100110011011101111001101111111110001\n" | ./des
+# Chạy file thực thi
+./des
